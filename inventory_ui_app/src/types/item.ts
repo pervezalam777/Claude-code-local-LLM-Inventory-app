@@ -1,7 +1,7 @@
 export interface Item {
   id: number;
   sku?: string;
-  item_name: string;
+  itemName: string;
   description?: string;
   category: string;
   quantity: number;
@@ -15,7 +15,7 @@ export type ItemStatus = 'in_stock' | 'low_stock' | 'out_of_stock';
 
 export interface CreateItemInput {
   sku?: string;
-  item_name: string;
+  itemName: string;
   description?: string;
   category: string;
   quantity: number;

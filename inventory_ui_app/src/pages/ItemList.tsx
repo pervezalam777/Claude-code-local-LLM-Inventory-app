@@ -8,6 +8,7 @@ import { ToastContainer } from '../components/ui/Toast';
 import { useItems } from '../hooks/useItems';
 import { deleteItem as deleteItemService } from '../api/itemService';
 import type { Item, ItemStatus } from '../types/item';
+import { formatDate } from '../utils/dateFormatter';
 
 // Toast management
 interface ToastMessage {
@@ -40,7 +41,7 @@ function RowActions({ item, onDelete }: { item: Item; onDelete?: (id: number) =>
         size="sm"
         variant="danger"
         onClick={() => {
-          if (window.confirm(`Are you sure you want to delete "${item.item_name}"?`)) {
+          if (window.confirm(`Are you sure you want to delete "${item.itemName}"?`)) {
             onDelete?.(item.id);
           }
         }}
@@ -91,7 +92,7 @@ export default function ItemList() {
       label: 'SKU',
       render: (value) => value ?? '-',
     },
-    { key: 'item_name', label: 'Name' },
+    { key: 'itemName', label: 'Name' },
     {
       key: 'category',
       label: 'Category',
@@ -115,7 +116,12 @@ export default function ItemList() {
         <Badge variant={getStatusVariant(value as ItemStatus)}>{String(value).replace('_', ' ').toUpperCase()}</Badge>
       ),
     },
-    { key: 'createdAt', label: 'Created', align: 'right' },
+    {
+      key: 'createdAt',
+      label: 'Created',
+      align: 'right',
+      render: (value) => formatDate(value as string),
+    },
     {
       key: 'id',
       label: 'Actions',

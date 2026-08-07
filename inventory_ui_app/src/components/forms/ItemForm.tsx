@@ -7,7 +7,7 @@ export interface ItemFormProps {
   onSubmit: (data: FormData) => void;
   defaultValue?: {
     sku?: string;
-    item_name?: string;
+    itemName?: string;
     description?: string;
     category?: string;
     quantity?: number;
@@ -20,7 +20,7 @@ export interface ItemFormProps {
 
 export interface FormData {
   sku?: string;
-  item_name: string;
+  itemName: string;
   description: string;
   category: string;
   quantity: number;
@@ -42,7 +42,7 @@ export const ItemForm: React.FC<ItemFormProps> = ({
 }) => {
   const [formData, setFormData] = React.useState<FormData>({
     sku: defaultValue.sku ?? '',
-    item_name: defaultValue.item_name ?? '',
+    itemName: defaultValue.itemName ?? '',
     description: defaultValue.description ?? '',
     category: defaultValue.category ?? '',
     quantity: defaultValue.quantity ?? 0,
@@ -55,8 +55,8 @@ export const ItemForm: React.FC<ItemFormProps> = ({
   const validate = (): boolean => {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
 
-    if (!formData.item_name.trim()) {
-      newErrors.item_name = 'Item name is required';
+    if (!formData.itemName.trim()) {
+      newErrors.itemName = 'Item name is required';
     }
 
     if (formData.quantity < 0) {
@@ -114,12 +114,12 @@ export const ItemForm: React.FC<ItemFormProps> = ({
         />
         <Input
           label="Item Name"
-          name="item_name"
+          name="itemName"
           type="text"
           placeholder="Enter item name"
-          value={formData.item_name}
+          value={formData.itemName}
           onChange={handleChange}
-          error={errors.item_name}
+          error={errors.itemName}
           required
         />
       </div>
@@ -207,7 +207,7 @@ export const ItemForm: React.FC<ItemFormProps> = ({
       <div className="flex items-center justify-end space-x-3 pt-4">
         <Button type="button" variant="secondary" onClick={() => setFormData({
           sku: '',
-          item_name: '',
+          itemName: '',
           description: '',
           category: '',
           quantity: 0,

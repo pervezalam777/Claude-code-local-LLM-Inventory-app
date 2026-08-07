@@ -5,6 +5,7 @@ import { ItemForm, FormData, ItemFormProps as FormProps } from '../components/fo
 import type { ItemStatus, UpdateItemInput } from '../types/item';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
+import { formatDate } from '../utils/dateFormatter';
 
 interface ToastMessage {
   id: string;
@@ -52,7 +53,7 @@ export default function ItemDetail() {
       const updateData: Partial<UpdateItemInput> = {};
 
       if (data.sku !== item.sku) updateData.sku = data.sku;
-      if (data.item_name !== item.item_name) updateData.item_name = data.item_name;
+      if (data.itemName !== item.itemName) updateData.itemName = data.itemName;
       if (data.description !== item.description) updateData.description = data.description;
       if (data.quantity !== item.quantity) updateData.quantity = data.quantity;
       if (data.price !== item.price) updateData.price = data.price;
@@ -113,7 +114,7 @@ export default function ItemDetail() {
   if (isEditing) {
     const initialData: FormProps['defaultValue'] = {
       sku: item.sku,
-      item_name: item.item_name,
+      itemName: item.itemName,
       description: item.description || undefined,
       category: item.category,
       quantity: item.quantity,
@@ -167,7 +168,7 @@ export default function ItemDetail() {
           </div>
           <div className="sm:col-span-2">
             <dt className="text-sm font-medium text-gray-500">Name</dt>
-            <dd className="mt-1 text-lg font-semibold text-gray-900">{item.item_name}</dd>
+            <dd className="mt-1 text-lg font-semibold text-gray-900">{item.itemName}</dd>
           </div>
           <div className="sm:col-span-2">
             <dt className="text-sm font-medium text-gray-500">Description</dt>
@@ -187,11 +188,11 @@ export default function ItemDetail() {
           </div>
           <div className="sm:col-span-2">
             <dt className="text-sm font-medium text-gray-500">Created At</dt>
-            <dd className="mt-1 text-sm text-gray-500">{new Date(item.createdAt).toLocaleString()}</dd>
+            <dd className="mt-1 text-sm text-gray-500">{formatDate(item.createdAt)}</dd>
           </div>
           <div className="sm:col-span-2">
             <dt className="text-sm font-medium text-gray-500">Updated At</dt>
-            <dd className="mt-1 text-sm text-gray-500">{new Date(item.updatedAt).toLocaleString()}</dd>
+            <dd className="mt-1 text-sm text-gray-500">{formatDate(item.updatedAt)}</dd>
           </div>
         </dl>
       </div>

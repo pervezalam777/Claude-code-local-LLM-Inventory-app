@@ -26,9 +26,32 @@ apiClient.interceptors.request.use(
   }
 );
 
-// Response interceptor - handle global 4xx/5xx errors
+// Helper function to convert snake_case keys to camelCase
+const convertToCamelCase = <T extends object>(obj: T): T => {
+  if (Array.isArray(obj)) {
+    return obj.map(item => convertToCamelCase(item)) as unknown as T;
+  }
+  if (obj === null || typeof obj !== 'object') {
+    return obj;
+  }
+
+  const result: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(obj)) {
+    const camelKey = key.replace(/_([a-z])/g, (match, letter) => letter.toUpperCase());
+    result[camelKey] = typeof value === 'object' ? convertToCamelCase(value) : value;
+  }
+  return result as T;
+};
+
+// Response interceptor - handle global 4xx/5xx errors and convert snake_case to camelCase
 apiClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // Convert response data from snake_case to camelCase
+    if (response.data) {
+      response.data = convertToCamelCase(response.data);
+    }
+    return response;
+  },
   (error: AxiosError) => {
     // Handle HTTP errors globally
     if (error.response) {
