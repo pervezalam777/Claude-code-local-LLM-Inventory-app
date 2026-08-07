@@ -37,6 +37,7 @@ def test_create_item(client: TestClient):
     assert data["category"] == ITEM_PAYLOAD["category"]
     assert data["quantity"] == ITEM_PAYLOAD["quantity"]
     assert data["sku"] == ITEM_PAYLOAD["sku"]
+    assert data["status"] == "in_stock"  # Default status from create
     assert "id" in data
     assert "created_at" in data
 
@@ -55,6 +56,16 @@ def test_create_item_without_sku(client: TestClient):
     assert resp.status_code == 201
     data = resp.json()
     assert data["sku"] is None
+    assert data["status"] == "in_stock"  # Default status still applied
+
+
+def test_create_item_with_status(client: TestClient):
+    """Verify item can be created with a custom status."""
+    payload = {**ITEM_PAYLOAD, "status": "low_stock"}
+    resp = client.post("/api/v1/items/", json=payload)
+    assert resp.status_code == 201
+    data = resp.json()
+    assert data["status"] == "low_stock"
 
 
 # -- Read (list) --
@@ -120,12 +131,30 @@ def test_update_item_partial(created_item, client: TestClient):
     assert data["item_name"] == ITEM_PAYLOAD["item_name"]  # unchanged
 
 
+def test_update_item_status_patch(created_item, client: TestClient):
+    """Verify status can be updated via PATCH."""
+    item_id = created_item["id"]
+    resp = client.patch(f"/api/v1/items/{item_id}", json={"status": "low_stock"})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["status"] == "low_stock"
+
+
 def test_update_item_sku(created_item, client: TestClient):
     item_id = created_item["id"]
     resp = client.patch(f"/api/v1/items/{item_id}", json={"sku": "UPD-001"})
     assert resp.status_code == 200
     data = resp.json()
     assert data["sku"] == "UPD-001"
+
+
+def test_update_item_status_field_in_response(created_item, client: TestClient):
+    """Verify the response always includes status field."""
+    item_id = created_item["id"]
+    resp = client.patch(f"/api/v1/items/{item_id}", json={"quantity": 3})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "status" in data
 
 
 # -- Replace (PUT) --
@@ -146,6 +175,24 @@ def test_replace_item(created_item, client: TestClient):
     assert data["sku"] == "PUT-001"
     assert data["item_name"] == new_data["item_name"]
     assert data["price"] == new_data["price"]
+
+
+def test_replace_item_status(created_item, client: TestClient):
+    """Verify status can be replaced via PUT."""
+    item_id = created_item["id"]
+    new_data = {
+        "sku": "PUT-002",
+        "item_name": "Mouse",
+        "description": "Wireless",
+        "category": "Electronics",
+        "quantity": 5,
+        "price": 39.99,
+        "status": "out_of_stock",
+    }
+    resp = client.put(f"/api/v1/items/{item_id}", json=new_data)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["status"] == "out_of_stock"
 
 
 # -- Delete --

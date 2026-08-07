@@ -11,9 +11,11 @@ class ItemBase(BaseModel):
     category: str = Field(..., min_length=1, max_length=100, description="Category of the item")
     quantity: int = Field(..., ge=0, description="Quantity in stock")
     price: float = Field(..., ge=0.0, description="Price in INR")
+    status: Optional[str] = Field(None, max_length=50, description="Item status")
 
 
 class ItemCreate(ItemBase):
+    # All fields from ItemBase are inherited; item_name and category must be provided
     pass
 
 
@@ -24,11 +26,11 @@ class ItemUpdate(BaseModel):
     category: Optional[str] = Field(None, min_length=1, max_length=100)
     quantity: Optional[int] = Field(None, ge=0)
     price: Optional[float] = Field(None, ge=0.0)
+    status: Optional[str] = Field(None, max_length=50)
 
 
 class ItemResponse(ItemBase):
     id: int
-    status: str
     created_at: datetime
     updated_at: datetime
 

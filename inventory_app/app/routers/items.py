@@ -43,7 +43,7 @@ def create_item(payload: ItemCreate, session: Session = Depends(get_session)) ->
         category=payload.category,
         quantity=payload.quantity,
         price=payload.price,
-        status="in_stock",
+        status=payload.status or "in_stock",
         created_at=now,
         updated_at=now,
     )
@@ -76,8 +76,9 @@ def replace_item(
     item = session.query(Item).filter(Item.id == item_id).first()
     if not item:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
-    for field in ("sku", "item_name", "description", "category", "quantity", "price"):
-        setattr(item, field, getattr(payload, field))
+    update_data = payload.model_dump(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(item, field, value)
     item.updated_at = _now_naive()
     session.commit()
     session.refresh(item)
