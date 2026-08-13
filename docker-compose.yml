@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # Inventory Backend API (FastAPI)
+  inventory-app:
+    build:
+      context: ./inventory_app
+      dockerfile: Dockerfile.dev
+    container_name: inventory-app-dev
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./inventory.db
+      - PROJECT_NAME="Inventory Management API"
+      - ENVIRONMENT=development
+    volumes:
+      - ./inventory_app:/app
+      - /app/.venv
+      - ./inventory_app/inventory.db:/app/inventory.db
+    restart: unless-stopped
+    networks:
+      - inventory-network
+
+  # Inventory Frontend UI (React)
+  inventory-ui:
+    build:
+      context: ./inventory_ui_app
+      dockerfile: Dockerfile.dev
+    container_name: inventory-ui-dev
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    volumes:
+      - ./inventory_ui_app:/app
+      - /app/node_modules
+    restart: unless-stopped
+    networks:
+      - inventory-network
+    depends_on:
+      - inventory-app
+
+networks:
+  inventory-network:
+    driver: bridge
+
+volumes:
+  inventory-db:
+    driver: local

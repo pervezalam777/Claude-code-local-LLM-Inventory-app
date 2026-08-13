@@ -134,3 +134,69 @@ npm run dev
 - [`inventory_ui_app/src/App.tsx`](inventory_ui_app/src/App.tsx) - Main routing configuration
 - [`inventory_ui_app/src/pages/ItemList.tsx`](inventory_ui_app/src/pages/ItemList.tsx) - Item listing with pagination
 - [`inventory_ui_app/src/api/client.ts`](inventory_ui_app/src/api/client.ts) - Axios client setup
+
+---
+
+## Docker & Kubernetes Deployment
+
+### Docker Images
+
+Each application has separate Dockerfiles for development and production:
+
+#### Backend (`inventory_app`)
+| File | Description |
+|------|-------------|
+| `Dockerfile` / `Dockerfile.dev` | Dev image with hot-reload (`--reload`) |
+| `Dockerfile.prod` | Production image with 4 workers, non-root user |
+
+#### Frontend (`inventory_ui_app`)
+| File | Description |
+|------|-------------|
+| `Dockerfile` / `Dockerfile.dev` | Dev image with Vite dev server on port 5173 |
+| `Dockerfile.prod` | Production image using multi-stage nginx build |
+
+### Docker Compose
+
+```bash
+# Development environment (with hot-reload)
+docker-compose up --build
+
+# Production environment
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+The dev compose file mounts volumes for live code updates.
+
+### Kubernetes Manifests (`k8s/`)
+
+| File | Description |
+|------|-------------|
+| `all-in-one.yml` | Combined manifest for easy deployment |
+| `configmap.yml` | Environment configuration |
+| `secrets.yml` | PostgreSQL credentials (base64 encoded) |
+| `persistent-volume-claims.yml` | PVCs for app and database data |
+| `postgres-deployment.yml` | PostgreSQL stateful set |
+| `backend-deployment.yml` | FastAPI backend (3 replicas, health checks) |
+| `frontend-deployment.yml` | React frontend with nginx proxy |
+| `ingress.yml` | Ingress routing (`/api` → backend, `/` → frontend) |
+
+### K8s Deployment
+
+```bash
+# Apply all manifests
+kubectl apply -f k8s/all-in-one.yml
+
+# Or apply individually
+kubectl apply -f k8s/configmap.yml
+kubectl apply -f k8s/secrets.yml
+kubectl apply -f k8s/persistent-volume-claims.yml
+kubectl apply -f k8s/postgres-deployment.yml
+kubectl apply -f k8s/backend-deployment.yml
+kubectl apply -f k8s/frontend-deployment.yml
+kubectl apply -f k8s/ingress.yml
+
+# Cleanup
+kubectl delete -f k8s/all-in-one.yml
+```
+
+See [`k8s/README.md`](k8s/README.md) for detailed Kubernetes deployment instructions.

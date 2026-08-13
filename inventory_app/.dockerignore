@@ -1,0 +1,49 @@
+# Virtual environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Dependencies (will be reinstalled in container)
+node_modules/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+README.md
+docs/
+
+# Tests
+tests/
+pytest.ini
+.pytest_cache/
+coverage.xml
+htmlcov/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache
+.mypy_cache/
+.ruff_cache/
+migrations/versions/*.py
