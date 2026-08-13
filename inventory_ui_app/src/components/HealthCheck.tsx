@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import apiClient from '../api/client';
 
+const API_PREFIX = '/api/v1';
+
 function HealthCheck() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [responseDate, setResponseDate] = useState<string | null>(null);
@@ -8,7 +10,7 @@ function HealthCheck() {
   const checkHealth = async () => {
     setStatus('loading');
     try {
-      const response = await apiClient.get('/health');
+      const response = await apiClient.get(`$${API_PREFIX}/health`);
       setStatus('success');
       setResponseDate(response.data?.timestamp || new Date().toISOString());
       console.log('Health check successful:', response.data);

@@ -32,3 +32,5 @@ export const LoadingSpinner = ({
     </div>
   );
 };
+
+LoadingSpinner.displayName = 'LoadingSpinner';
