@@ -14,6 +14,8 @@ services:
       - PROJECT_NAME="Inventory Management API"
       - ENVIRONMENT=production
       - UVICORN_WORKERS=4
+      # CORS configuration for production
+      - CORS_ALLOWED_ORIGINS=http://localhost,http://inventory-ui
     volumes:
       - inventory-data:/app/data
     restart: unless-stopped
@@ -36,6 +38,7 @@ services:
       - "80:80"
     environment:
       - VITE_API_URL=http://localhost/api/
+      # CORS allowed origins from the frontend perspective (for nginx proxy)
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost/health"]

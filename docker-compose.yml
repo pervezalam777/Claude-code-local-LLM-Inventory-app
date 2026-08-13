@@ -13,6 +13,8 @@ services:
       - DATABASE_URL=sqlite:///./inventory.db
       - PROJECT_NAME="Inventory Management API"
       - ENVIRONMENT=development
+      # CORS configuration for development
+      - CORS_ALLOWED_ORIGINS=http://localhost:5173,http://inventory-ui:5173
     volumes:
       - ./inventory_app:/app
       - /app/.venv
