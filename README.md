@@ -4,7 +4,7 @@ This project is a full-stack Inventory Management application featuring a FastAP
 
 ## Application Details
 
-### Backend (`inventory_app`)
+### Backend ([`inventory_app`](inventory_app/))
 
 A RESTful API built with **FastAPI** that provides comprehensive inventory management capabilities:
 
@@ -17,6 +17,7 @@ A RESTful API built with **FastAPI** that provides comprehensive inventory manag
 
 #### Database Schema
 The `Item` model includes the following fields:
+
 | Field | Type | Description |
 |-------|------|-------------|
 | id | Integer (PK) | Auto-incrementing identifier |
@@ -31,6 +32,7 @@ The `Item` model includes the following fields:
 | updated_at | DateTime | Last update timestamp |
 
 #### API Endpoints
+
 | Method | Path | Description |
 |--------|------|-------------|
 | GET | `/` | Health check |
@@ -49,6 +51,7 @@ python -m venv .venv
 pip install .[dev]
 uvicorn app.main:app --reload
 ```
+
 - API docs: http://localhost:8000/docs
 - ReDoc: http://localhost:8000/redoc
 
@@ -59,9 +62,9 @@ pytest tests/ -v
 
 ---
 
-### Frontend (`inventory_ui_app`)
+### Frontend ([`inventory_ui_app`](inventory_ui_app/))
 
-A modern React application built with **Vite** that provides a user-friendly interface for inventory management:
+A modern React application built with **Vite** that provides a user-friendly interface for inventory management.
 
 #### Technology Stack
 - **Framework**: React 19.2.8
@@ -70,70 +73,93 @@ A modern React application built with **Vite** that provides a user-friendly int
 - **Styling**: Tailwind CSS 4.3.3
 - **Routing**: React Router DOM 7.18.2
 - **HTTP Client**: Axios 1.19.0
-
-#### Project Structure
-```
-src/
-├── api/               # API integration layer
-│   ├── client.ts     # Centralized axios configuration
-│   └── itemService.ts # CRUD service functions
-├── components/        # Reusable UI components
-│   ├── forms/        # Form components (ItemForm)
-│   └── ui/          # Atomic design primitives
-│       ├── Button, Input, Label, Badge, Table
-│       ├── Modal, Navbar, LoadingSpinner, Toast
-└── pages/           # Page-level components
-    ├── ItemList     # Main dashboard with pagination
-    ├── ItemCreate   # Item creation form
-    └── ItemDetail   # View and edit items
-```
+- **Testing**: Vitest with React Testing Library
 
 #### Features
 - **Item Listing**: View all inventory items with pagination (5, 10, 20, 50 per page)
 - **Item Creation**: Form-based item creation with validation
 - **Item Details**: Detailed view of individual items with edit capability
-- **Status Indicators**: Color-coded badges for stock status (Green=In Stock, Yellow=Low Stock, Red=Out of Stock)
+- **Status Indicators**: Color-coded badges for stock status:
+  - Green = In Stock
+  - Yellow = Low Stock
+  - Red = Out of Stock
 - **Pagination Controls**: Navigate through pages with configurable page size
 - **Responsive Design**: Mobile-friendly UI using Tailwind CSS
+- **API Health Check**: Visual health check component to verify backend connectivity
+
+#### Project Structure
+```
+inventory_ui_app/
+├── src/
+│   ├── api/                 # API integration layer
+│   │   ├── client.ts       # Centralized axios configuration with interceptors
+│   │   └── itemService.ts  # CRUD service functions
+│   ├── components/          # Reusable UI components
+│   │   ├── forms/          # Form components (ItemForm)
+│   │   └── ui/             # Atomic design primitives
+│   │       ├── Button, Input, Label, Badge, Table
+│   │       ├── Modal, Navbar, LoadingSpinner, Toast
+│   ├── hooks/               # Custom React hooks for state management
+│   │   ├── useItems.ts     # Hook for item list operations
+│   │   └── useItem.ts      # Hook for single item operations
+│   ├── pages/               # Page-level components
+│   │   ├── ItemList.tsx    # Main dashboard with pagination
+│   │   ├── ItemCreate.tsx  # Item creation form
+│   │   └── ItemDetail.tsx  # View and edit items
+│   ├── types/               # TypeScript type definitions
+│   │   └── item.ts         # Item, CreateItemInput, UpdateItemInput types
+│   ├── utils/               # Utility functions
+│   │   └── dateFormatter.ts # Date formatting helpers
+│   ├── test/                # Test setup and configuration
+│   │   └── setup.ts        # Vitest + Testing Library setup
+│   ├── App.tsx             # Main application component with routing
+│   ├── main.tsx            # Application entry point
+│   └── index.css           # Global styles (Tailwind directives)
+├── vite.config.ts           # Vite configuration with Vitest
+├── tsconfig.json            # TypeScript configuration
+└── package.json             # Dependencies and scripts
+```
 
 #### API Integration
 The frontend communicates with the backend at `http://localhost:8000` using a centralized axios client with:
 - Request/response interceptors for error handling
 - Automatic JSON serialization/deserialization
 - HTTP status code handling (4xx/5xx)
+- Automatic snake_case to camelCase conversion
 
 #### Setup & Run
-```bash
+```powershell
 cd inventory_ui_app
 npm install
 npm run dev
 ```
+
 - Frontend runs at: http://localhost:5173
 
-### Data Flow
+#### Testing
+```powershell
+# Run tests in watch mode
+npm test
 
-1. User interacts with the React UI
-2. Custom hooks (`useItems`, `useItem`) manage state and API calls
-3. Service modules (`itemService.ts`) make HTTP requests to the backend
-4. FastAPI processes requests, validates data, and updates SQLite database
-5. Response flows back through the same layers to update UI state
+# Run tests once (for CI/CD)
+npm run test:run
 
-### Machine Configuration
-- **Processor**: Intel(R) Core(TM) Ultra 9 275HX (2.70 GHz)
-- **RAM**: 64.0 GB
-- **GPU**: NVIDIA GeForce RTX 5090 Laptop GPU (24 GB)
+# Run with UI dashboard
+npm run test:ui
+```
 
-### Key Files
+This project uses **Vitest** with React Testing Library for unit testing. Test files are located in `src/**/*.test.tsx`.
 
-**Backend:**
-- [`inventory_app/app/main.py`](inventory_app/app/main.py) - FastAPI application entry point
-- [`inventory_app/app/routers/items.py`](inventory_app/app/routers/items.py) - Item CRUD endpoints
-- [`inventory_app/app/models/item.py`](inventory_app/app/models/item.py) - SQLAlchemy model definition
+#### Available Scripts
 
-**Frontend:**
-- [`inventory_ui_app/src/App.tsx`](inventory_ui_app/src/App.tsx) - Main routing configuration
-- [`inventory_ui_app/src/pages/ItemList.tsx`](inventory_ui_app/src/pages/ItemList.tsx) - Item listing with pagination
-- [`inventory_ui_app/src/api/client.ts`](inventory_ui_app/src/api/client.ts) - Axios client setup
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server with hot-reload |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build locally |
+| `npm test` | Run tests in watch mode |
+| `npm run test:run` | Run tests once (no watch) |
+| `npm run test:ui` | Run tests with Vitest UI |
 
 ---
 
@@ -200,3 +226,15 @@ kubectl delete -f k8s/all-in-one.yml
 ```
 
 See [`k8s/README.md`](k8s/README.md) for detailed Kubernetes deployment instructions.
+
+## Development Setup
+
+1. **Clone the repository**
+2. **Backend**: Navigate to `inventory_app` and follow setup instructions in its [README](inventory_app/README.md)
+3. **Frontend**: Navigate to `inventory_ui_app` and run `npm install && npm run dev`
+4. Ensure the backend is running on port 8000 before starting the frontend
+
+## Machine Configuration
+- **Processor**: Intel(R) Core(TM) Ultra 9 275HX (2.70 GHz)
+- **RAM**: 64.0 GB
+- **GPU**: NVIDIA GeForce RTX 5090 Laptop GPU (24 GB)
