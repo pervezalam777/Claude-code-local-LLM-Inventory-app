@@ -32,4 +32,7 @@ tsconfig.node.json
 src/
 
 # Cache
-node_modules/.cache/
+node_modules/
+
+# SonarQube cache
+.sonarqube/.cache/
