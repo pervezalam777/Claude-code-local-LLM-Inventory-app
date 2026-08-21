@@ -154,7 +154,7 @@ export default function ItemList() {
       <ToastContainer toasts={toasts} onRemove={(id) => setToasts((prev) => prev.filter((t) => t.id !== id))} />
 
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Items</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Items</h1>
         <Button onClick={() => navigate('/items/new')}>Add Item</Button>
       </div>
 
@@ -171,13 +171,13 @@ export default function ItemList() {
 
           {/* Pagination controls */}
           {paginatedData && paginatedData.total > 0 && (
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-gray-200 pt-4">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-gray-200 dark:border-gray-700 pt-4">
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-600">Showing</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">Showing</span>
                 <select
                   value={limit}
                   onChange={handlePageSizeChange}
-                  className="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  className="rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                 >
                   {[5, 10, 20, 50].map((size) => (
                     <option key={size} value={size}>
@@ -185,7 +185,7 @@ export default function ItemList() {
                     </option>
                   ))}
                 </select>
-                <span className="text-sm text-gray-600">of {paginatedData.total} items</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">of {paginatedData.total} items</span>
               </div>
 
               <div className="flex items-center gap-2">
@@ -196,7 +196,7 @@ export default function ItemList() {
                 >
                   Previous
                 </Button>
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-gray-600 dark:text-gray-400">
                   Page {Math.floor(skip / limit) + 1} of{' '}
                   {paginatedData.total ? Math.ceil(paginatedData.total / limit) : 1}
                 </span>

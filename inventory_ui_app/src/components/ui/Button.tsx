@@ -15,13 +15,13 @@ const getBaseStyles = () =>
 
 const getVariantStyles = (variant: ButtonVariant) => {
   const variants = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-500',
-    secondary: 'bg-gray-100 text-gray-900 hover:bg-gray-200 focus-visible:ring-gray-500',
-    danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:ring-red-500',
-    success: 'bg-green-600 text-white hover:bg-green-700 focus-visible:ring-green-500',
-    warning: 'bg-yellow-500 text-white hover:bg-yellow-600 focus-visible:ring-yellow-500',
-    info: 'bg-blue-500 text-white hover:bg-blue-600 focus-visible:ring-blue-500',
-    ghost: 'hover:bg-gray-100 text-gray-700',
+    primary: 'bg-blue-600 dark:bg-blue-600 text-white hover:bg-blue-700 dark:hover:bg-blue-500 focus-visible:ring-blue-500',
+    secondary: 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600 focus-visible:ring-gray-500',
+    danger: 'bg-red-600 dark:bg-red-600 text-white hover:bg-red-700 dark:hover:bg-red-500 focus-visible:ring-red-500',
+    success: 'bg-green-600 dark:bg-green-600 text-white hover:bg-green-700 dark:hover:bg-green-500 focus-visible:ring-green-500',
+    warning: 'bg-yellow-500 dark:bg-yellow-500 text-white hover:bg-yellow-600 dark:hover:bg-yellow-400 focus-visible:ring-yellow-500',
+    info: 'bg-blue-500 dark:bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-400 focus-visible:ring-blue-500',
+    ghost: 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300',
   };
   return variants[variant];
 };
