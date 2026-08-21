@@ -62,7 +62,6 @@ export default function ItemList() {
   // Add toast helper
   const addToast = (message: string, variant: ToastMessage['variant']) => {
     const id = Math.random().toString(36).substring(7);
-    void id; // Suppress unused variable warning
     setToasts((prev) => [...prev, { id, message, variant }]);
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));

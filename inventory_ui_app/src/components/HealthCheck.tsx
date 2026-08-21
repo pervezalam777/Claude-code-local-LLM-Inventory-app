@@ -10,7 +10,7 @@ function HealthCheck() {
   const checkHealth = async () => {
     setStatus('loading');
     try {
-      const response = await apiClient.get(`$${API_PREFIX}/health`);
+      const response = await apiClient.get(`${API_PREFIX}/health`);
       setStatus('success');
       setResponseDate(response.data?.timestamp || new Date().toISOString());
       console.log('Health check successful:', response.data);
