@@ -31,16 +31,16 @@ export const Modal = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/50 backdrop-blur-sm p-4">
       <div
-        className={`relative w-full ${getWidthClass(width)} rounded-lg bg-white shadow-xl`}
+        className={`relative w-full ${getWidthClass(width)} rounded-lg bg-white dark:bg-gray-800 shadow-xl`}
         onClick={(e) => e.stopPropagation()}
       >
         {title && (
-          <div className="flex items-center justify-between border-b px-6 py-4">
-            <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
+          <div className="flex items-center justify-between border-b px-6 py-4 dark:border-gray-700">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{title}</h3>
             <button
               type="button"
               onClick={onClose}
-              className="ml-auto inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-transparent text-sm transition-colors hover:bg-gray-100 hover:text-gray-900"
+              className="ml-auto inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-transparent text-sm transition-colors hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               <svg
                 className="h-4 w-4"
@@ -60,7 +60,7 @@ export const Modal = ({
         )}
         <div className="px-6 py-4">{children}</div>
         {footer && (
-          <div className="flex items-center justify-end space-x-2 border-t px-6 py-4">
+          <div className="flex items-center justify-end space-x-2 border-t px-6 py-4 dark:border-gray-700">
             {footer}
           </div>
         )}
@@ -69,4 +69,4 @@ export const Modal = ({
   );
 };
 
-Modal.displayName = 'Modal'
+Modal.displayName = 'Modal';

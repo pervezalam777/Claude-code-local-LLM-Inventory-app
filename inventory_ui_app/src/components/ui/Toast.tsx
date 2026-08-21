@@ -13,10 +13,10 @@ interface ToastContainerProps {
 
 const getVariantStyles = (variant: ToastVariant) => {
   const variants = {
-    success: 'bg-green-50 text-green-800 border-green-200',
-    error: 'bg-red-50 text-red-800 border-red-200',
-    warning: 'bg-yellow-50 text-yellow-800 border-yellow-200',
-    info: 'bg-blue-50 text-blue-800 border-blue-200',
+    success: 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800/50',
+    error: 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300 border-red-200 dark:border-red-800/50',
+    warning: 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800/50',
+    info: 'bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800/50',
   };
   return variants[variant];
 };
@@ -108,7 +108,7 @@ export const ToastContainer = ({
           <button
             type="button"
             onClick={() => onRemove(toast.id)}
-            className="ml-auto -mx-1.5 -my-1.5 rounded-lg p-1.5 inline-flex h-8 w-8 items-center justify-center hover:bg-black/5 focus:ring-2 focus:ring-gray-300"
+            className="ml-auto -mx-1.5 -my-1.5 rounded-lg p-1.5 inline-flex h-8 w-8 items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-600"
           >
             <svg
               className="h-4 w-4"

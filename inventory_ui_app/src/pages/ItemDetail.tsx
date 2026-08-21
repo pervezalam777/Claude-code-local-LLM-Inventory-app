@@ -88,7 +88,7 @@ export default function ItemDetail() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-500"></div>
       </div>
     );
   }
@@ -96,7 +96,7 @@ export default function ItemDetail() {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center h-96">
-        <p className="text-red-500 mb-4">{error}</p>
+        <p className="text-red-500 dark:text-red-400 mb-4">{error}</p>
         <Button onClick={() => navigate('/items')}>Back to Items</Button>
       </div>
     );
@@ -105,7 +105,7 @@ export default function ItemDetail() {
   if (!item) {
     return (
       <div className="flex flex-col items-center justify-center h-96">
-        <p className="text-gray-500 mb-4">Item not found</p>
+        <p className="text-gray-500 dark:text-gray-400 mb-4">Item not found</p>
         <Button onClick={() => navigate('/items')}>Back to Items</Button>
       </div>
     );
@@ -125,12 +125,12 @@ export default function ItemDetail() {
     return (
       <div className="max-w-2xl mx-auto py-8">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Edit Item</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Edit Item</h1>
           <Button variant="secondary" onClick={() => setIsEditing(false)}>
             Cancel
           </Button>
         </div>
-        <div className="overflow-hidden rounded-xl bg-white shadow">
+        <div className="overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow">
           <ItemForm onSubmit={handleUpdate} defaultValue={initialData} submitLabel="Save Changes" />
         </div>
       </div>
@@ -140,7 +140,7 @@ export default function ItemDetail() {
   return (
     <div className="max-w-2xl mx-auto py-8">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Item Details</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Item Details</h1>
         <div className="space-x-2">
           <Button variant="secondary" onClick={() => navigate('/items')}>
             Back to List
@@ -152,47 +152,47 @@ export default function ItemDetail() {
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-xl bg-white shadow">
+      <div className="overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow">
         <dl className="grid grid-cols-1 gap-x-4 gap-y-8 p-6 sm:grid-cols-2">
           <div className="sm:col-span-1">
-            <dt className="text-sm font-medium text-gray-500">ID</dt>
-            <dd className="mt-1 text-lg font-semibold text-gray-900">{item.id}</dd>
+            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">ID</dt>
+            <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">{item.id}</dd>
           </div>
           <div className="sm:col-span-1">
-            <dt className="text-sm font-medium text-gray-500">SKU</dt>
-            <dd className="mt-1 text-lg font-semibold text-gray-900">{item.sku || '-'}</dd>
+            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">SKU</dt>
+            <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">{item.sku || '-'}</dd>
           </div>
           <div className="sm:col-span-1">
-            <dt className="text-sm font-medium text-gray-500">Status</dt>
+            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Status</dt>
             <dd className="mt-1">{getStatusBadge(item.status)}</dd>
           </div>
           <div className="sm:col-span-2">
-            <dt className="text-sm font-medium text-gray-500">Name</dt>
-            <dd className="mt-1 text-lg font-semibold text-gray-900">{item.itemName}</dd>
+            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Name</dt>
+            <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">{item.itemName}</dd>
           </div>
           <div className="sm:col-span-2">
-            <dt className="text-sm font-medium text-gray-500">Description</dt>
-            <dd className="mt-1 text-sm text-gray-900">
-              {item.description || <span className="italic text-gray-400">No description</span>}
+            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Description</dt>
+            <dd className="mt-1 text-sm text-gray-900 dark:text-gray-300">
+              {item.description || <span className="italic text-gray-400 dark:text-gray-500">No description</span>}
             </dd>
           </div>
           <div className="sm:col-span-1">
-            <dt className="text-sm font-medium text-gray-500">Quantity</dt>
-            <dd className="mt-1 text-lg font-semibold text-gray-900">{item.quantity}</dd>
+            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Quantity</dt>
+            <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">{item.quantity}</dd>
           </div>
           <div className="sm:col-span-1">
-            <dt className="text-sm font-medium text-gray-500">Price</dt>
-            <dd className="mt-1 text-lg font-semibold text-gray-900">
+            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Price</dt>
+            <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
               ${item.price.toFixed(2)}
             </dd>
           </div>
           <div className="sm:col-span-2">
-            <dt className="text-sm font-medium text-gray-500">Created At</dt>
-            <dd className="mt-1 text-sm text-gray-500">{formatDate(item.createdAt)}</dd>
+            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Created At</dt>
+            <dd className="mt-1 text-sm text-gray-500 dark:text-gray-400">{formatDate(item.createdAt)}</dd>
           </div>
           <div className="sm:col-span-2">
-            <dt className="text-sm font-medium text-gray-500">Updated At</dt>
-            <dd className="mt-1 text-sm text-gray-500">{formatDate(item.updatedAt)}</dd>
+            <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Updated At</dt>
+            <dd className="mt-1 text-sm text-gray-500 dark:text-gray-400">{formatDate(item.updatedAt)}</dd>
           </div>
         </dl>
       </div>
@@ -202,12 +202,12 @@ export default function ItemDetail() {
         <div
           className={`fixed bottom-4 right-4 z-50 flex w-full max-w-xs items-center rounded-lg border p-4 shadow-lg transition-all ${
             toast.variant === 'error'
-              ? 'bg-red-50 text-red-800 border-red-200'
+              ? 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300 border-red-200 dark:border-red-800/50'
               : toast.variant === 'warning'
-              ? 'bg-yellow-50 text-yellow-800 border-yellow-200'
+              ? 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800/50'
               : toast.variant === 'info'
-              ? 'bg-blue-50 text-blue-800 border-blue-200'
-              : 'bg-green-50 text-green-800 border-green-200'
+              ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800/50'
+              : 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800/50'
           }`}
           role="alert"
         >
@@ -262,7 +262,7 @@ export default function ItemDetail() {
           <button
             type="button"
             onClick={() => setToast(null)}
-            className="ml-auto -mx-1.5 -my-1.5 rounded-lg p-1.5 inline-flex h-8 w-8 items-center justify-center hover:bg-black/5 focus:ring-2 focus:ring-gray-300"
+            className="ml-auto -mx-1.5 -my-1.5 rounded-lg p-1.5 inline-flex h-8 w-8 items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-600"
           >
             <svg
               className="h-4 w-4"

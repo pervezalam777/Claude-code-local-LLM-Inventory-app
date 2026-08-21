@@ -125,14 +125,14 @@ export const ItemForm: React.FC<ItemFormProps> = ({
       </div>
 
       <div>
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Description
         </label>
         <textarea
           id="description"
           name="description"
           rows={3}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+          className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           placeholder="Enter item description"
           value={formData.description}
           onChange={handleTextAreaChange}
@@ -140,14 +140,14 @@ export const ItemForm: React.FC<ItemFormProps> = ({
       </div>
 
       <div>
-        <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Category
         </label>
         <input
           id="category"
           name="category"
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+          className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           placeholder="Enter item category"
           value={formData.category}
           onChange={handleChange}
@@ -186,13 +186,13 @@ export const ItemForm: React.FC<ItemFormProps> = ({
       </div>
 
       <div>
-        <label htmlFor="status" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Status
         </label>
         <select
           id="status"
           name="status"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+          className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           value={formData.status}
           onChange={handleChange}
         >

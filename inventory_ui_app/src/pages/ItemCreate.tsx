@@ -52,22 +52,22 @@ export default function ItemCreate() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-8">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-gray-900">Create New Item</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Create New Item</h1>
           <button
             type="button"
             onClick={handleCancel}
-            className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            className="inline-flex items-center rounded-md bg-white dark:bg-gray-800 px-3 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700"
           >
             Cancel
           </button>
         </div>
 
         {/* Form Card */}
-        <div className="overflow-hidden rounded-xl bg-white shadow">
+        <div className="overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow">
           <div className="px-6 py-6 sm:p-8">
             <ItemForm onSubmit={handleSubmit} submitLabel="Create Item" isLoading={false} />
           </div>
@@ -85,7 +85,7 @@ export default function ItemCreate() {
               </Button>
             }
           >
-            <div className={`p-4 ${toast.variant === 'error' ? 'bg-red-50 text-red-800' : 'bg-green-50 text-green-800'} rounded-lg`}>
+            <div className={`p-4 ${toast.variant === 'error' ? 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300' : 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300'} rounded-lg`}>
               {toast.message}
             </div>
           </Modal>

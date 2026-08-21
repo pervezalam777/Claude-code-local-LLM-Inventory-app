@@ -9,7 +9,7 @@ app = FastAPI(title="Inventory Management API", version="0.1.0")
 
 # CORS policy - get allowed origins from environment variable
 # Supports comma-separated list of origins (e.g., "http://localhost:5173,http://frontend:80")
-ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:5173").split(",")
+ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:5176").split(",")
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,7 +26,7 @@ def startup() -> None:
     Base.metadata.create_all(bind=engine)
 
 
-@app.get("/")
+@app.get("/api/v1/health")
 def health_check():
     return {"status": "ok"}
 

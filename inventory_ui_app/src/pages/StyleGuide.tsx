@@ -57,7 +57,7 @@ function ModalExample() {
         Open Modal
       </Button>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Confirmation">
-        <p className="text-gray-600">Are you sure you want to delete this item?</p>
+        <p className="text-gray-600 dark:text-gray-300">Are you sure you want to delete this item?</p>
         <div className="mt-4 flex justify-end gap-2">
           <Button variant="secondary" onClick={() => setIsOpen(false)}>
             Cancel
@@ -159,19 +159,19 @@ export default function StyleGuide() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Style Guide</h1>
-        <p className="text-lg text-gray-600">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Style Guide</h1>
+        <p className="text-lg text-gray-600 dark:text-gray-300">
           This page demonstrates the UI primitives created for the Inventory App.
         </p>
       </div>
 
       {/* Buttons Section */}
-      <section className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Buttons</h2>
+      <section className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Buttons</h2>
         <div className="space-y-6">
           {/* Variants */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Variants</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Variants</h3>
             <div className="flex flex-wrap gap-3">
               <Button variant="primary">Primary Button</Button>
               <Button variant="secondary">Secondary Button</Button>
@@ -182,7 +182,7 @@ export default function StyleGuide() {
 
           {/* Sizes */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Sizes</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Sizes</h3>
             <div className="flex flex-wrap gap-3 items-center">
               <Button size="sm">Small</Button>
               <Button size="md">Medium</Button>
@@ -192,7 +192,7 @@ export default function StyleGuide() {
 
           {/* Loading State */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Loading State</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Loading State</h3>
             <div className="flex flex-wrap gap-3">
               <Button variant="primary" isLoading>Loading...</Button>
               <Button variant="secondary" isLoading />
@@ -201,7 +201,7 @@ export default function StyleGuide() {
 
           {/* Error State */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Error State</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Error State</h3>
             <div className="flex flex-wrap gap-3">
               <Button variant="primary" error="This is an error message">
                 Primary with Error
@@ -214,7 +214,7 @@ export default function StyleGuide() {
 
           {/* Disabled State */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Disabled State</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Disabled State</h3>
             <div className="flex flex-wrap gap-3">
               <Button variant="primary" disabled>Disabled Primary</Button>
               <Button variant="secondary" disabled>Disabled Secondary</Button>
@@ -223,7 +223,7 @@ export default function StyleGuide() {
 
           {/* With Icons */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">With Icons (using SVG)</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">With Icons (using SVG)</h3>
             <div className="flex flex-wrap gap-3">
               <Button variant="primary">
                 <svg
@@ -257,18 +257,18 @@ export default function StyleGuide() {
       </section>
 
       {/* Inputs Section */}
-      <section className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Inputs</h2>
+      <section className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h2>
         <div className="space-y-6 max-w-md">
           {/* Basic Input */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Basic Inputs</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Basic Inputs</h3>
             <Input label="Name" placeholder="Enter your name" />
           </div>
 
           {/* With Error */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">With Error</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">With Error</h3>
             <Input
               label="Email"
               error="Please enter a valid email address"
@@ -278,13 +278,13 @@ export default function StyleGuide() {
 
           {/* Required Field */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Required Field</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Required Field</h3>
             <Input label="Username" required placeholder="Choose a username" />
           </div>
 
           {/* With Icons */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">With Icons</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">With Icons</h3>
             <Input
               label="Search"
               leftIcon={
@@ -307,7 +307,7 @@ export default function StyleGuide() {
 
           {/* Helper Text */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Helper Text</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Helper Text</h3>
             <Input
               label="Password"
               type="password"
@@ -318,7 +318,7 @@ export default function StyleGuide() {
 
           {/* Disabled Input */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Disabled Input</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Disabled Input</h3>
             <Input
               label="Status"
               value="Active"
@@ -330,8 +330,8 @@ export default function StyleGuide() {
       </section>
 
       {/* Labels Section */}
-      <section className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Labels</h2>
+      <section className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Labels</h2>
         <div className="space-y-6 max-w-md">
           <Label htmlFor="label1" required>
             Required Label
@@ -351,8 +351,8 @@ export default function StyleGuide() {
       </section>
 
       {/* Badges Section */}
-      <section className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Badges</h2>
+      <section className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Badges</h2>
         <div className="space-y-6 flex flex-wrap gap-3">
           <Badge variant="success">In Stock</Badge>
           <Badge variant="warning">Low Stock</Badge>
@@ -362,32 +362,32 @@ export default function StyleGuide() {
       </section>
 
       {/* Table Section */}
-      <section className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Table</h2>
+      <section className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Table</h2>
         <div className="space-y-6">
           <TableExample />
         </div>
       </section>
 
       {/* Layout & Feedback Section */}
-      <section className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Layout & Feedback</h2>
+      <section className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Layout & Feedback</h2>
         <div className="space-y-8">
           {/* Modal Example */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Modal</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Modal</h3>
             <ModalExample />
           </div>
 
           {/* Navbar Example */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Navbar</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Navbar</h3>
             <NavbarExample />
           </div>
 
           {/* LoadingSpinner Example */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Loading Spinner</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Loading Spinner</h3>
             <div className="flex flex-wrap gap-4 items-center">
               <LoadingSpinner size="sm" text="Small" />
               <LoadingSpinner size="md" text="Medium" />
@@ -397,19 +397,19 @@ export default function StyleGuide() {
 
           {/* Toast Example */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Toast Notifications</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Toast Notifications</h3>
             <ToastExample />
           </div>
         </div>
       </section>
 
       {/* Usage Example */}
-      <section className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Usage Example</h2>
-        <p className="text-gray-600 mb-4">
+      <section className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Usage Example</h2>
+        <p className="text-gray-600 dark:text-gray-300 mb-4">
           Here's how to use these components in your code:
         </p>
-        <pre className="bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto text-sm font-mono">
+        <pre className="bg-gray-800 dark:bg-gray-900 text-gray-100 dark:text-gray-300 p-4 rounded-md overflow-x-auto text-sm font-mono">
 {`import { Button } from './components/ui/Button';
 import { Input } from './components/ui/Input';
 import { Label } from './components/ui/Label';

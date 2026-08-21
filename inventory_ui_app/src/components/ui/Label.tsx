@@ -16,18 +16,18 @@ export const Label: React.FC<LabelProps> = ({
   return (
     <label
       htmlFor={htmlFor}
-      className={`block text-sm font-medium text-gray-700 ${className}`}
+      className={`block text-sm font-medium text-gray-700 dark:text-gray-300 ${className}`}
       {...props}
     >
       <span className="flex items-center">
         {children}
         {required && (
-          <span className="ml-1 text-red-500" aria-hidden="true">
+          <span className="ml-1 text-red-500 dark:text-red-400" aria-hidden="true">
             *
           </span>
         )}
       </span>
-      {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
+      {error && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{error}</p>}
     </label>
   );
 };

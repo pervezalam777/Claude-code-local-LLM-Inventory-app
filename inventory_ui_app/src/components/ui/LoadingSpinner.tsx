@@ -22,7 +22,7 @@ export const LoadingSpinner = ({
   return (
     <div className={`flex flex-col items-center justify-center ${className}`}>
       <div
-        className={`${getSizeClass(size)} border-t-gray-300 animate-spin rounded-full border-t-blue-600`}
+        className={`${getSizeClass(size)} border-t-gray-300 dark:border-t-blue-500 animate-spin rounded-full border-t-blue-600 dark:border-t-blue-400`}
       />
       {text && (
         <p className="mt-2 text-sm font-medium text-gray-500 dark:text-gray-400">
