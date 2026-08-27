@@ -57,22 +57,25 @@ export const useItem = (): UseItemReturn => {
     }
   }, []);
 
-  const updateItem = useCallback(async (id: number, data: UpdateItemInput): Promise<Item | null> => {
-    setLoading(true);
-    setError(null);
+  const updateItem = useCallback(
+    async (id: number, data: UpdateItemInput): Promise<Item | null> => {
+      setLoading(true);
+      setError(null);
 
-    try {
-      const updatedItem = await updateItemService(id, data);
-      setItem(updatedItem);
-      return updatedItem;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : `Failed to update item ${id}`;
-      setError(errorMessage);
-      return null;
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+      try {
+        const updatedItem = await updateItemService(id, data);
+        setItem(updatedItem);
+        return updatedItem;
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : `Failed to update item ${id}`;
+        setError(errorMessage);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    },
+    []
+  );
 
   const deleteItem = useCallback(async (id: number): Promise<boolean> => {
     setLoading(true);

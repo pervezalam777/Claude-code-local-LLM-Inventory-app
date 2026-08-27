@@ -1,0 +1,3 @@
+#!/bin/sh
+# husky hook - inventory_ui_app pre-commit
+. "$(dirname "$0")/_husky.sh"

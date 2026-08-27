@@ -1,15 +1,9 @@
-import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import MockAdapter from 'axios-mock-adapter';
 
 // Import apiClient
 import apiClient from './client';
-import {
-  getItems,
-  getItem,
-  createItem,
-  updateItem,
-  deleteItem,
-} from './itemService';
+import { getItems, getItem, createItem, updateItem, deleteItem } from './itemService';
 import type { Item, PaginatedItems } from '../types/item';
 
 let mock: MockAdapter;
@@ -174,7 +168,7 @@ describe('itemService', () => {
 
       mock.onPost('/api/v1/items').reply(400, { error: 'Item name is required' });
 
-      await expect(createItem(incompleteInput as any)).rejects.toThrow();
+      await expect(createItem(incompleteInput as never)).rejects.toThrow();
     });
   });
 

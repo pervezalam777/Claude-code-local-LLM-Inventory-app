@@ -10,6 +10,11 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   helperText?: string;
 }
 
+// Generate a unique ID for input elements
+const generateInputId = (): string => {
+  return `input-${Math.random().toString(36).substr(2, 9)}`;
+};
+
 export const Input: React.FC<InputProps> = ({
   label,
   required,
@@ -21,7 +26,7 @@ export const Input: React.FC<InputProps> = ({
   id,
   ...props
 }) => {
-  const inputId = id || props.name?.toString() || `input-${Math.random().toString(36).substr(2, 9)}`;
+  const inputId = id || props.name?.toString() || generateInputId();
 
   return (
     <div className="w-full">
@@ -47,7 +52,9 @@ export const Input: React.FC<InputProps> = ({
             ${className}
           `}
           aria-invalid={!!error}
-          aria-describedby={error ? `${inputId}-error` : helperText ? `${inputId}-helper` : undefined}
+          aria-describedby={
+            error ? `${inputId}-error` : helperText ? `${inputId}-helper` : undefined
+          }
           {...props}
         />
         {rightIcon && (

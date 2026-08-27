@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { render, screen, waitFor, act, waitForElementToBeRemoved } from '@testing-library/react';
-import { MemoryRouter, useNavigate, useParams } from 'react-router-dom';
+import { render, screen, waitFor, act } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
 // Create mock functions before importing
 const navigateMock = vi.fn();
@@ -8,7 +8,7 @@ const paramsMock = { id: '1' };
 
 // Mock react-router-dom - use importOriginal to keep actual exports plus add the mocks
 vi.mock('react-router-dom', async (importOriginal) => ({
-  ...(await importOriginal<any>()),
+  ...(await importOriginal<Record<string, unknown>>()),
   useParams: () => paramsMock,
   useNavigate: () => navigateMock,
 }));
@@ -474,7 +474,6 @@ describe('ItemDetail', () => {
     expect(screen.getByRole('button', { name: /edit/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /delete/i })).toBeInTheDocument();
   });
-
 
   it('shows error toast when delete fails', async () => {
     // Mock confirm to return true for delete

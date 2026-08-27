@@ -16,42 +16,59 @@ export interface UseItemsReturn {
  * @param initialSkip - Initial offset for pagination (default: 0)
  * @param initialLimit - Initial page size (default: 10)
  */
-export const useItems = (
-  initialSkip: number = 0,
-  initialLimit: number = 10
-): UseItemsReturn => {
+export const useItems = (initialSkip: number = 0, initialLimit: number = 10): UseItemsReturn => {
   const [items, setItems] = useState<Item[]>([]);
   const [paginatedData, setPaginatedData] = useState<PaginatedItems | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchItems = useCallback(async (skip: number = initialSkip, limit: number = initialLimit) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const data = await getItemsService(skip, limit);
-      setItems(data.items);
-      setPaginatedData(data);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch items';
-      setError(errorMessage);
-    } finally {
-      setLoading(false);
-    }
+  // Initial fetch effect - runs once on mount
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await getItemsService(initialSkip, initialLimit);
+        setItems(data.items);
+        setPaginatedData(data);
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Failed to fetch items';
+        setError(errorMessage);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialSkip, initialLimit]);
 
+  // Fetch function for manual refresh
+  const fetchItems = useCallback(
+    async (skip: number = initialSkip, limit: number = initialLimit) => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const data = await getItemsService(skip, limit);
+        setItems(data.items);
+        setPaginatedData(data);
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Failed to fetch items';
+        setError(errorMessage);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [initialSkip, initialLimit]
+  );
+
+  // Refresh function using current pagination params
   const refresh = useCallback(async () => {
-    // Refresh using current pagination params
     if (paginatedData) {
       return fetchItems(paginatedData.skip, paginatedData.limit);
     }
     return fetchItems(initialSkip, initialLimit);
   }, [fetchItems, paginatedData, initialSkip, initialLimit]);
-
-  useEffect(() => {
-    fetchItems(initialSkip, initialLimit);
-  }, [initialSkip, initialLimit, fetchItems]);
 
   return {
     items,

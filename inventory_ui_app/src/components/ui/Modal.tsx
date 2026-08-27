@@ -18,14 +18,7 @@ const getWidthClass = (width: ModalProps['width']) => {
   return widths[width] || widths.md;
 };
 
-export const Modal = ({
-  isOpen,
-  onClose,
-  title,
-  children,
-  width = 'md',
-  footer,
-}: ModalProps) => {
+export const Modal = ({ isOpen, onClose, title, children, width = 'md', footer }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
@@ -42,12 +35,7 @@ export const Modal = ({
               onClick={onClose}
               className="ml-auto inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-transparent text-sm transition-colors hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white"
             >
-              <svg
-                className="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"

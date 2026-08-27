@@ -1,26 +1,31 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { ItemForm, FormData } from './ItemForm';
+import { ItemForm, type FormData } from './ItemForm';
 
 // Mock the child components - include error display for proper testing
 vi.mock('../ui/Input', () => ({
-  Input: ({ label, name, error, ...props }: any) => (
+  Input: ({ label, name, error, ...props }: Record<string, unknown>) => (
     <div>
       <label htmlFor={name}>{label}</label>
       <input id={name} name={name} {...props} />
-      {error && <p data-error="true" className="text-red-600">{error}</p>}
+      {error && (
+        <p data-error="true" className="text-red-600">
+          {error}
+        </p>
+      )}
     </div>
   ),
 }));
 
 vi.mock('../ui/Button', () => ({
-  Button: ({ children, type, disabled, variant = 'primary', ...props }: any) => (
-    <button
-      type={type || 'button'}
-      disabled={disabled}
-      data-variant={variant}
-      {...props}
-    >
+  Button: ({
+    children,
+    type,
+    disabled,
+    variant = 'primary',
+    ...props
+  }: Record<string, unknown>) => (
+    <button type={type || 'button'} disabled={disabled} data-variant={variant} {...props}>
       {children}
     </button>
   ),
@@ -284,10 +289,13 @@ describe('ItemForm', () => {
 
     // Wait for form to be reset - the form state is internal to React component
     // and mock inputs may not fully sync, so check what we can
-    await waitFor(() => {
-      expect(nameInput).toHaveValue('');
-      expect(quantityInput).toHaveValue(0);
-    }, { timeout: 1000 });
+    await waitFor(
+      () => {
+        expect(nameInput).toHaveValue('');
+        expect(quantityInput).toHaveValue(0);
+      },
+      { timeout: 1000 }
+    );
   });
 
   it('sets status to in_stock by default when no default value provided', () => {
@@ -364,10 +372,7 @@ describe('ItemForm', () => {
 
   it('handles partial default values', () => {
     render(
-      <ItemForm
-        onSubmit={handleSubmit}
-        defaultValue={{ itemName: 'Partial', quantity: 5 }}
-      />
+      <ItemForm onSubmit={handleSubmit} defaultValue={{ itemName: 'Partial', quantity: 5 }} />
     );
 
     expect(screen.getByDisplayValue('Partial')).toBeInTheDocument();

@@ -44,7 +44,9 @@ describe('Table', () => {
     const { container } = render(<Table columns={columns} data={data} isLoading={true} />);
     const loader = container.querySelector('.flex.items-center.justify-center.py-12');
     expect(loader).toBeInTheDocument();
-    expect(loader?.querySelector('.animate-spin.rounded-full.h-8.w-8.border-b-2.border-blue-600')).toBeInTheDocument();
+    expect(
+      loader?.querySelector('.animate-spin.rounded-full.h-8.w-8.border-b-2.border-blue-600')
+    ).toBeInTheDocument();
   });
 
   it('shows empty message when data is empty', () => {
@@ -62,7 +64,9 @@ describe('Table', () => {
   });
 
   it('applies custom className to the table container', () => {
-    const { container } = render(<Table columns={columns} data={data} className="custom-table-class" />);
+    const { container } = render(
+      <Table columns={columns} data={data} className="custom-table-class" />
+    );
     const tableElement = container.querySelector('.overflow-x-auto');
     expect(tableElement).toBeInTheDocument();
     expect(tableElement?.querySelector('table')).toHaveClass('custom-table-class');
@@ -127,7 +131,11 @@ describe('Table', () => {
       {
         key: 'name',
         label: 'Name',
-        render: (value, row) => <strong>{value} - ID: {row.id}</strong>,
+        render: (value, row) => (
+          <strong>
+            {value} - ID: {row.id}
+          </strong>
+        ),
       },
       { key: 'email', label: 'Email' },
     ];

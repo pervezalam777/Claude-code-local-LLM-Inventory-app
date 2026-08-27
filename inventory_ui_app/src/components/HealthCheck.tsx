@@ -25,7 +25,9 @@ function HealthCheck() {
       <h3 className="text-lg font-semibold mb-2 dark:text-white">API Health Check</h3>
       <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
         Click the button below to test the API connection. The backend should be running at
-        <code className="mx-1 bg-gray-100 px-1 rounded dark:bg-gray-700">http://localhost:8000</code>
+        <code className="mx-1 bg-gray-100 px-1 rounded dark:bg-gray-700">
+          http://localhost:8000
+        </code>
       </p>
       <button
         onClick={checkHealth}
@@ -41,7 +43,9 @@ function HealthCheck() {
         {status === 'loading' ? 'Checking...' : 'Check API Health'}
       </button>
       {status === 'success' && (
-        <p className="mt-2 text-green-600 dark:text-green-400">Connected! Server time: {responseDate}</p>
+        <p className="mt-2 text-green-600 dark:text-green-400">
+          Connected! Server time: {responseDate}
+        </p>
       )}
       {status === 'error' && (
         <p className="mt-2 text-red-600 dark:text-red-400">

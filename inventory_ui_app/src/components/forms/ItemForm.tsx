@@ -125,7 +125,10 @@ export const ItemForm: React.FC<ItemFormProps> = ({
       </div>
 
       <div>
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+        >
           Description
         </label>
         <textarea
@@ -140,7 +143,10 @@ export const ItemForm: React.FC<ItemFormProps> = ({
       </div>
 
       <div>
-        <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label
+          htmlFor="category"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+        >
           Category
         </label>
         <input
@@ -186,7 +192,10 @@ export const ItemForm: React.FC<ItemFormProps> = ({
       </div>
 
       <div>
-        <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <label
+          htmlFor="status"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+        >
           Status
         </label>
         <select
@@ -205,15 +214,21 @@ export const ItemForm: React.FC<ItemFormProps> = ({
       </div>
 
       <div className="flex items-center justify-end space-x-3 pt-4">
-        <Button type="button" variant="secondary" onClick={() => setFormData({
-          sku: '',
-          itemName: '',
-          description: '',
-          category: '',
-          quantity: 0,
-          price: 0,
-          status: 'in_stock'
-        })}>
+        <Button
+          type="button"
+          variant="secondary"
+          onClick={() =>
+            setFormData({
+              sku: '',
+              itemName: '',
+              description: '',
+              category: '',
+              quantity: 0,
+              price: 0,
+              status: 'in_stock',
+            })
+          }
+        >
           Reset
         </Button>
         <Button type="submit" disabled={isLoading}>
