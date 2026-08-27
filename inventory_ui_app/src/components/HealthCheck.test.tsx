@@ -196,7 +196,7 @@ describe('HealthCheck', () => {
     });
   });
 
-  it('calls console.log with success data', async () => {
+  it('does not call console.log after success', async () => {
     const mockData = { timestamp: '2024-01-01T00:00:00Z' };
     (apiClient.get as vi.Mock).mockResolvedValue({ data: mockData });
 
@@ -206,7 +206,7 @@ describe('HealthCheck', () => {
     fireEvent.click(button);
 
     await waitFor(() => {
-      expect(console.log).toHaveBeenCalledWith('Health check successful:', mockData);
+      expect(console.log).not.toHaveBeenCalled();
     });
   });
 

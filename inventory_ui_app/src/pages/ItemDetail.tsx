@@ -31,7 +31,7 @@ export default function ItemDetail() {
   }, [id, fetchItem]);
 
   const addToast = (message: string, variant: ToastMessage['variant']) => {
-    const id = Math.random().toString(36).substring(7);
+    const id = crypto.randomUUID();
     setToast({ id, message, variant });
     setTimeout(() => {
       setToast(null);
@@ -195,7 +195,11 @@ export default function ItemDetail() {
           <div className="sm:col-span-1">
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Price</dt>
             <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
-              ${item.price.toFixed(2)}
+              <span className="text-gray-900 dark:text-white">
+                {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(
+                  Number(item.price)
+                )}
+              </span>
             </dd>
           </div>
           <div className="sm:col-span-2">

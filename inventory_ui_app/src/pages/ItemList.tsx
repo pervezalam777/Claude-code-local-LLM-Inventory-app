@@ -61,7 +61,7 @@ export default function ItemList() {
 
   // Add toast helper
   const addToast = (message: string, variant: ToastMessage['variant']) => {
-    const id = Math.random().toString(36).substring(7);
+    const id = crypto.randomUUID();
     setToasts((prev) => [...prev, { id, message, variant }]);
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
@@ -75,7 +75,7 @@ export default function ItemList() {
       const id = setTimeout(() => {
         setToasts((prev) => [
           ...prev,
-          { id: Math.random().toString(36).substring(7), message: error, variant: 'error' },
+          { id: crypto.randomUUID(), message: error, variant: 'error' },
         ]);
       }, 0);
       return () => clearTimeout(id);

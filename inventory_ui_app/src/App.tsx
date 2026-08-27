@@ -7,7 +7,6 @@ import ItemDetail from './pages/ItemDetail';
 import { CommonHeader } from './components/CommonHeader';
 
 export default function App() {
-  console.log('App component rendered');
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <CommonHeader />

@@ -11,11 +11,12 @@ function HealthCheck() {
     setStatus('loading');
     try {
       const response = await apiClient.get(`${API_PREFIX}/health`);
+      const timestamp = response.data?.timestamp || new Date().toISOString();
       setStatus('success');
-      setResponseDate(response.data?.timestamp || new Date().toISOString());
-      console.log('Health check successful:', response.data);
+      setResponseDate(timestamp);
     } catch (error) {
       setStatus('error');
+      setResponseDate(null);
       console.error('Health check failed:', error);
     }
   };

@@ -177,7 +177,7 @@ describe('ItemDetail', () => {
     expect(screen.getByText(/Test Laptop/)).toBeInTheDocument(); // Name
     expect(screen.getByText(/A test laptop item/)).toBeInTheDocument(); // Description
     expect(screen.getByText(/10/)).toBeInTheDocument(); // Quantity
-    expect(screen.getByText(/\$999.99/)).toBeInTheDocument(); // Price
+    expect(screen.getByText(/₹999.99/)).toBeInTheDocument(); // Price (INR symbol)
 
     // Check status badge
     expect(screen.getByText('In Stock')).toBeInTheDocument();

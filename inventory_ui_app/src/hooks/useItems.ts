@@ -64,10 +64,10 @@ export const useItems = (initialSkip: number = 0, initialLimit: number = 10): Us
 
   // Refresh function using current pagination params
   const refresh = useCallback(async () => {
-    if (paginatedData) {
-      return fetchItems(paginatedData.skip, paginatedData.limit);
-    }
-    return fetchItems(initialSkip, initialLimit);
+    // Use the most recent values from state, avoiding stale closure issues
+    const currentSkip = paginatedData?.skip ?? initialSkip;
+    const currentLimit = paginatedData?.limit ?? initialLimit;
+    return fetchItems(currentSkip, currentLimit);
   }, [fetchItems, paginatedData, initialSkip, initialLimit]);
 
   return {
