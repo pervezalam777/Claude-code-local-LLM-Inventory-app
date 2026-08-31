@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useItem } from '../hooks/useItem';
-import { ItemForm, FormData, ItemFormProps as FormProps } from '../components/forms/ItemForm';
 import type { ItemStatus, UpdateItemInput } from '../types/item';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { formatDate } from '../utils/dateFormatter';
+import {
+  ItemForm,
+  type FormData,
+  type ItemFormProps as FormProps,
+} from '../components/forms/ItemForm';
 
 interface ToastMessage {
   id: string;
@@ -27,7 +31,7 @@ export default function ItemDetail() {
   }, [id, fetchItem]);
 
   const addToast = (message: string, variant: ToastMessage['variant']) => {
-    const id = Math.random().toString(36).substring(7);
+    const id = crypto.randomUUID();
     setToast({ id, message, variant });
     setTimeout(() => {
       setToast(null);
@@ -160,7 +164,9 @@ export default function ItemDetail() {
           </div>
           <div className="sm:col-span-1">
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">SKU</dt>
-            <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">{item.sku || '-'}</dd>
+            <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
+              {item.sku || '-'}
+            </dd>
           </div>
           <div className="sm:col-span-1">
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Status</dt>
@@ -168,31 +174,45 @@ export default function ItemDetail() {
           </div>
           <div className="sm:col-span-2">
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Name</dt>
-            <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">{item.itemName}</dd>
+            <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
+              {item.itemName}
+            </dd>
           </div>
           <div className="sm:col-span-2">
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Description</dt>
             <dd className="mt-1 text-sm text-gray-900 dark:text-gray-300">
-              {item.description || <span className="italic text-gray-400 dark:text-gray-500">No description</span>}
+              {item.description || (
+                <span className="italic text-gray-400 dark:text-gray-500">No description</span>
+              )}
             </dd>
           </div>
           <div className="sm:col-span-1">
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Quantity</dt>
-            <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">{item.quantity}</dd>
+            <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
+              {item.quantity}
+            </dd>
           </div>
           <div className="sm:col-span-1">
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Price</dt>
             <dd className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
-              ${item.price.toFixed(2)}
+              <span className="text-gray-900 dark:text-white">
+                {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(
+                  Number(item.price)
+                )}
+              </span>
             </dd>
           </div>
           <div className="sm:col-span-2">
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Created At</dt>
-            <dd className="mt-1 text-sm text-gray-500 dark:text-gray-400">{formatDate(item.createdAt)}</dd>
+            <dd className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              {formatDate(item.createdAt)}
+            </dd>
           </div>
           <div className="sm:col-span-2">
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Updated At</dt>
-            <dd className="mt-1 text-sm text-gray-500 dark:text-gray-400">{formatDate(item.updatedAt)}</dd>
+            <dd className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              {formatDate(item.updatedAt)}
+            </dd>
           </div>
         </dl>
       </div>
@@ -204,21 +224,16 @@ export default function ItemDetail() {
             toast.variant === 'error'
               ? 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300 border-red-200 dark:border-red-800/50'
               : toast.variant === 'warning'
-              ? 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800/50'
-              : toast.variant === 'info'
-              ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800/50'
-              : 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800/50'
+                ? 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800/50'
+                : toast.variant === 'info'
+                  ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800/50'
+                  : 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800/50'
           }`}
           role="alert"
         >
           <div className="mr-3">
             {toast.variant === 'success' && (
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -228,12 +243,7 @@ export default function ItemDetail() {
               </svg>
             )}
             {toast.variant === 'error' && (
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -243,12 +253,7 @@ export default function ItemDetail() {
               </svg>
             )}
             {toast.variant === 'warning' && (
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -264,12 +269,7 @@ export default function ItemDetail() {
             onClick={() => setToast(null)}
             className="ml-auto -mx-1.5 -my-1.5 rounded-lg p-1.5 inline-flex h-8 w-8 items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-600"
           >
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

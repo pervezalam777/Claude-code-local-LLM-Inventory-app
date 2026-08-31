@@ -1,10 +1,5 @@
 import apiClient from './client';
-import {
-  Item,
-  CreateItemInput,
-  UpdateItemInput,
-  PaginatedItems,
-} from '../types/item';
+import type { Item, CreateItemInput, UpdateItemInput, PaginatedItems } from '../types/item';
 
 const API_PREFIX = '/api/v1'; // Adjust this based on your API versioning
 

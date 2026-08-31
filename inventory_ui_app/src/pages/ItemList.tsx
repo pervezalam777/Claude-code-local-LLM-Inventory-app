@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
-import { Table, Column } from '../components/ui/Table';
+import { Table, type Column } from '../components/ui/Table';
 import { Badge } from '../components/ui/Badge';
 import { LoadingSpinner } from '../components/ui/LoadingSpinner';
 import { ToastContainer } from '../components/ui/Toast';
@@ -61,7 +61,7 @@ export default function ItemList() {
 
   // Add toast helper
   const addToast = (message: string, variant: ToastMessage['variant']) => {
-    const id = Math.random().toString(36).substring(7);
+    const id = crypto.randomUUID();
     setToasts((prev) => [...prev, { id, message, variant }]);
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
@@ -71,7 +71,14 @@ export default function ItemList() {
   // Handle errors with toast
   useEffect(() => {
     if (error) {
-      addToast(error, 'error');
+      // Use setTimeout to defer state update and avoid synchronous setState in effect
+      const id = setTimeout(() => {
+        setToasts((prev) => [
+          ...prev,
+          { id: crypto.randomUUID(), message: error, variant: 'error' },
+        ]);
+      }, 0);
+      return () => clearTimeout(id);
     }
   }, [error]);
 
@@ -106,13 +113,18 @@ export default function ItemList() {
       key: 'price',
       label: 'Price',
       align: 'right',
-      render: (value) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(Number(value)),
+      render: (value) =>
+        new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(
+          Number(value)
+        ),
     },
     {
       key: 'status',
       label: 'Status',
       render: (value) => (
-        <Badge variant={getStatusVariant(value as ItemStatus)}>{String(value).replace('_', ' ').toUpperCase()}</Badge>
+        <Badge variant={getStatusVariant(value as ItemStatus)}>
+          {String(value).replace('_', ' ').toUpperCase()}
+        </Badge>
       ),
     },
     {
@@ -150,7 +162,10 @@ export default function ItemList() {
 
   return (
     <div className="space-y-6">
-      <ToastContainer toasts={toasts} onRemove={(id) => setToasts((prev) => prev.filter((t) => t.id !== id))} />
+      <ToastContainer
+        toasts={toasts}
+        onRemove={(id) => setToasts((prev) => prev.filter((t) => t.id !== id))}
+      />
 
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Items</h1>
@@ -161,12 +176,7 @@ export default function ItemList() {
         <LoadingSpinner size="lg" text="Loading items..." />
       ) : (
         <>
-          <Table
-            columns={columns}
-            data={items}
-            isLoading={false}
-            emptyMessage="No items found."
-          />
+          <Table columns={columns} data={items} isLoading={false} emptyMessage="No items found." />
 
           {/* Pagination controls */}
           {paginatedData && paginatedData.total > 0 && (
@@ -184,15 +194,13 @@ export default function ItemList() {
                     </option>
                   ))}
                 </select>
-                <span className="text-sm text-gray-600 dark:text-gray-400">of {paginatedData.total} items</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  of {paginatedData.total} items
+                </span>
               </div>
 
               <div className="flex items-center gap-2">
-                <Button
-                  variant="secondary"
-                  onClick={handlePrevious}
-                  disabled={skip === 0}
-                >
+                <Button variant="secondary" onClick={handlePrevious} disabled={skip === 0}>
                   Previous
                 </Button>
                 <span className="text-sm text-gray-600 dark:text-gray-400">

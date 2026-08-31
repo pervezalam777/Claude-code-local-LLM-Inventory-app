@@ -7,13 +7,13 @@ const navigateMock = vi.fn();
 
 // Mock react-router-dom - use importOriginal to keep actual exports plus add the mock
 vi.mock('react-router-dom', async (importOriginal) => ({
-  ...(await importOriginal<any>()),
+  ...(await importOriginal<Record<string, unknown>>()),
   useNavigate: () => navigateMock,
 }));
 
 // Mock child components and services before importing the component
 vi.mock('../components/forms/ItemForm', () => ({
-  ItemForm: ({ onSubmit, submitLabel, isLoading }: any) => {
+  ItemForm: ({ onSubmit, submitLabel, isLoading }: Record<string, unknown>) => {
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       if (onSubmit) {
@@ -33,7 +33,7 @@ vi.mock('../components/forms/ItemForm', () => ({
 }));
 
 vi.mock('../components/ui/Modal', () => ({
-  Modal: ({ isOpen, onClose, title, footer, children }: any) => {
+  Modal: ({ isOpen, onClose, title, footer, children }: Record<string, unknown>) => {
     if (!isOpen) return null;
     return (
       <div data-mocked-modal="true">
@@ -165,9 +165,12 @@ describe('ItemCreate', () => {
       form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
     }
 
-    await waitFor(() => {
-      expect(navigateMock).toHaveBeenCalledWith('/items');
-    }, { timeout: 5000 });
+    await waitFor(
+      () => {
+        expect(navigateMock).toHaveBeenCalledWith('/items');
+      },
+      { timeout: 5000 }
+    );
   });
 
   it('shows error toast when item creation fails', async () => {

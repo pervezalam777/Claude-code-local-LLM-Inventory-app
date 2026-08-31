@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ItemForm, FormData } from '../components/forms/ItemForm';
+import { ItemForm, type FormData } from '../components/forms/ItemForm';
 import { Modal } from '../components/ui/Modal';
 import { Button } from '../components/ui/Button';
 import { createItem } from '../api/itemService';
@@ -19,6 +19,13 @@ export default function ItemCreate() {
   // Get refresh function from useItems hook
   const { paginatedData } = useItems(0, 10);
 
+  // Clear toast state when navigating away or component unmounts
+  useEffect(() => {
+    return () => {
+      setToast(null);
+    };
+  }, []);
+
   // Auto-refresh list when new item is created
   React.useEffect(() => {
     if (paginatedData) {
@@ -27,7 +34,7 @@ export default function ItemCreate() {
   }, [paginatedData]);
 
   const addToast = (message: string, variant: ToastMessage['variant']) => {
-    const id = Math.random().toString(36).substring(7);
+    const id = crypto.randomUUID();
     setToast({ id, message, variant });
     setTimeout(() => {
       setToast(null);
@@ -85,7 +92,9 @@ export default function ItemCreate() {
               </Button>
             }
           >
-            <div className={`p-4 ${toast.variant === 'error' ? 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300' : 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300'} rounded-lg`}>
+            <div
+              className={`p-4 ${toast.variant === 'error' ? 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300' : 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300'} rounded-lg`}
+            >
               {toast.message}
             </div>
           </Modal>

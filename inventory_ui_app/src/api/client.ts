@@ -1,9 +1,9 @@
-import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios';
 
 // Create a singleton axios instance
 const apiClient = axios.create({
   baseURL: 'http://localhost:8000',
-  timeout: 10000,
+  timeout: 20000,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -29,7 +29,7 @@ apiClient.interceptors.request.use(
 // Helper function to convert snake_case keys to camelCase
 const convertToCamelCase = <T extends object>(obj: T): T => {
   if (Array.isArray(obj)) {
-    return obj.map(item => convertToCamelCase(item)) as unknown as T;
+    return obj.map((item) => convertToCamelCase(item)) as unknown as T;
   }
   if (obj === null || typeof obj !== 'object') {
     return obj;

@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { renderHook, waitFor, act } from '@testing-library/react';
 
 // Mock the itemService module - only mock getItems function
@@ -12,7 +12,7 @@ vi.mock('../api/itemService', async (importOriginal) => {
 
 import * as itemService from '../api/itemService';
 import { useItems } from './useItems';
-import type { PaginatedItems, Item } from '../types/item';
+import type { PaginatedItems } from '../types/item';
 
 describe('useItems', () => {
   beforeEach(() => {
@@ -217,12 +217,9 @@ describe('useItems', () => {
     it('should re-fetch when initialSkip changes', async () => {
       vi.clearAllMocks();
 
-      const { result, rerender } = renderHook(
-        (props) => useItems(props.skip, props.limit),
-        {
-          initialProps: { skip: 0, limit: 10 },
-        }
-      );
+      const { result, rerender } = renderHook((props) => useItems(props.skip, props.limit), {
+        initialProps: { skip: 0, limit: 10 },
+      });
 
       await waitFor(() => {
         expect(result.current.loading).toBe(false);

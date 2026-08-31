@@ -57,7 +57,9 @@ function ModalExample() {
         Open Modal
       </Button>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Confirmation">
-        <p className="text-gray-600 dark:text-gray-300">Are you sure you want to delete this item?</p>
+        <p className="text-gray-600 dark:text-gray-300">
+          Are you sure you want to delete this item?
+        </p>
         <div className="mt-4 flex justify-end gap-2">
           <Button variant="secondary" onClick={() => setIsOpen(false)}>
             Cancel
@@ -96,16 +98,11 @@ function ToastExample() {
       <div className="flex flex-wrap gap-3">
         <Button
           variant="success"
-          onClick={() =>
-            addToast('success', 'Operation completed successfully!')
-          }
+          onClick={() => addToast('success', 'Operation completed successfully!')}
         >
           Show Success Toast
         </Button>
-        <Button
-          variant="danger"
-          onClick={() => addToast('error', 'An error occurred.')}
-        >
+        <Button variant="danger" onClick={() => addToast('error', 'An error occurred.')}>
           Show Error Toast
         </Button>
         <Button
@@ -114,16 +111,14 @@ function ToastExample() {
         >
           Show Warning Toast
         </Button>
-        <Button
-          variant="info"
-          onClick={() => addToast('info', 'New update available')}
-        >
+        <Button variant="info" onClick={() => addToast('info', 'New update available')}>
           Show Info Toast
         </Button>
       </div>
-      <ToastContainer toasts={toasts} onRemove={(id) =>
-        setToasts((prev) => prev.filter((t) => t.id !== id))
-      } />
+      <ToastContainer
+        toasts={toasts}
+        onRemove={(id) => setToasts((prev) => prev.filter((t) => t.id !== id))}
+      />
     </div>
   );
 }
@@ -148,7 +143,9 @@ function TableExample() {
     {
       key: 'price',
       label: 'Price',
-      render: (value: React.ReactNode) => <span className="font-medium">${Number(value).toFixed(2)}</span>,
+      render: (value: React.ReactNode) => (
+        <span className="font-medium">${Number(value).toFixed(2)}</span>
+      ),
     },
   ];
 
@@ -192,16 +189,22 @@ export default function StyleGuide() {
 
           {/* Loading State */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Loading State</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+              Loading State
+            </h3>
             <div className="flex flex-wrap gap-3">
-              <Button variant="primary" isLoading>Loading...</Button>
+              <Button variant="primary" isLoading>
+                Loading...
+              </Button>
               <Button variant="secondary" isLoading />
             </div>
           </div>
 
           {/* Error State */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Error State</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+              Error State
+            </h3>
             <div className="flex flex-wrap gap-3">
               <Button variant="primary" error="This is an error message">
                 Primary with Error
@@ -214,16 +217,24 @@ export default function StyleGuide() {
 
           {/* Disabled State */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Disabled State</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+              Disabled State
+            </h3>
             <div className="flex flex-wrap gap-3">
-              <Button variant="primary" disabled>Disabled Primary</Button>
-              <Button variant="secondary" disabled>Disabled Secondary</Button>
+              <Button variant="primary" disabled>
+                Disabled Primary
+              </Button>
+              <Button variant="secondary" disabled>
+                Disabled Secondary
+              </Button>
             </div>
           </div>
 
           {/* With Icons */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">With Icons (using SVG)</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+              With Icons (using SVG)
+            </h3>
             <div className="flex flex-wrap gap-3">
               <Button variant="primary">
                 <svg
@@ -262,13 +273,17 @@ export default function StyleGuide() {
         <div className="space-y-6 max-w-md">
           {/* Basic Input */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Basic Inputs</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+              Basic Inputs
+            </h3>
             <Input label="Name" placeholder="Enter your name" />
           </div>
 
           {/* With Error */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">With Error</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+              With Error
+            </h3>
             <Input
               label="Email"
               error="Please enter a valid email address"
@@ -278,13 +293,17 @@ export default function StyleGuide() {
 
           {/* Required Field */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Required Field</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+              Required Field
+            </h3>
             <Input label="Username" required placeholder="Choose a username" />
           </div>
 
           {/* With Icons */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">With Icons</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+              With Icons
+            </h3>
             <Input
               label="Search"
               leftIcon={
@@ -307,7 +326,9 @@ export default function StyleGuide() {
 
           {/* Helper Text */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Helper Text</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+              Helper Text
+            </h3>
             <Input
               label="Password"
               type="password"
@@ -318,13 +339,10 @@ export default function StyleGuide() {
 
           {/* Disabled Input */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Disabled Input</h3>
-            <Input
-              label="Status"
-              value="Active"
-              disabled
-              placeholder="Status"
-            />
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+              Disabled Input
+            </h3>
+            <Input label="Status" value="Active" disabled placeholder="Status" />
           </div>
         </div>
       </section>
@@ -338,9 +356,7 @@ export default function StyleGuide() {
           </Label>
           <Input id="label1" />
 
-          <Label htmlFor="label2">
-            Optional Label
-          </Label>
+          <Label htmlFor="label2">Optional Label</Label>
           <Input id="label2" />
 
           <Label htmlFor="label3" error="This field has an error">
@@ -371,7 +387,9 @@ export default function StyleGuide() {
 
       {/* Layout & Feedback Section */}
       <section className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Layout & Feedback</h2>
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+          Layout & Feedback
+        </h2>
         <div className="space-y-8">
           {/* Modal Example */}
           <div>
@@ -387,7 +405,9 @@ export default function StyleGuide() {
 
           {/* LoadingSpinner Example */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Loading Spinner</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+              Loading Spinner
+            </h3>
             <div className="flex flex-wrap gap-4 items-center">
               <LoadingSpinner size="sm" text="Small" />
               <LoadingSpinner size="md" text="Medium" />
@@ -397,7 +417,9 @@ export default function StyleGuide() {
 
           {/* Toast Example */}
           <div>
-            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">Toast Notifications</h3>
+            <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+              Toast Notifications
+            </h3>
             <ToastExample />
           </div>
         </div>
@@ -407,10 +429,10 @@ export default function StyleGuide() {
       <section className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Usage Example</h2>
         <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Here's how to use these components in your code:
+          Here&apos;s how to use these components in your code:
         </p>
         <pre className="bg-gray-800 dark:bg-gray-900 text-gray-100 dark:text-gray-300 p-4 rounded-md overflow-x-auto text-sm font-mono">
-{`import { Button } from './components/ui/Button';
+          {`import { Button } from './components/ui/Button';
 import { Input } from './components/ui/Input';
 import { Label } from './components/ui/Label';
 

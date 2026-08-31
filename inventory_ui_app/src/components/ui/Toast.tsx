@@ -13,9 +13,12 @@ interface ToastContainerProps {
 
 const getVariantStyles = (variant: ToastVariant) => {
   const variants = {
-    success: 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800/50',
-    error: 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300 border-red-200 dark:border-red-800/50',
-    warning: 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800/50',
+    success:
+      'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800/50',
+    error:
+      'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300 border-red-200 dark:border-red-800/50',
+    warning:
+      'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800/50',
     info: 'bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800/50',
   };
   return variants[variant];
@@ -24,12 +27,7 @@ const getVariantStyles = (variant: ToastVariant) => {
 const getIcon = (variant: ToastVariant) => {
   const icons = {
     success: (
-      <svg
-        className="h-5 w-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
+      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -39,12 +37,7 @@ const getIcon = (variant: ToastVariant) => {
       </svg>
     ),
     error: (
-      <svg
-        className="h-5 w-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
+      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -54,12 +47,7 @@ const getIcon = (variant: ToastVariant) => {
       </svg>
     ),
     warning: (
-      <svg
-        className="h-5 w-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
+      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -69,12 +57,7 @@ const getIcon = (variant: ToastVariant) => {
       </svg>
     ),
     info: (
-      <svg
-        className="h-5 w-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
+      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -87,10 +70,7 @@ const getIcon = (variant: ToastVariant) => {
   return icons[variant];
 };
 
-export const ToastContainer = ({
-  toasts,
-  onRemove,
-}: ToastContainerProps) => {
+export const ToastContainer = ({ toasts, onRemove }: ToastContainerProps) => {
   if (toasts.length === 0) return null;
 
   return (
@@ -98,9 +78,9 @@ export const ToastContainer = ({
       {toasts.map((toast) => (
         <div
           key={toast.id}
-          className={`flex w-full max-w-xs items-center rounded-lg border p-4 shadow-lg transition-all ${
-            getVariantStyles(toast.variant)
-          }`}
+          className={`flex w-full max-w-xs items-center rounded-lg border p-4 shadow-lg transition-all ${getVariantStyles(
+            toast.variant
+          )}`}
           role="alert"
         >
           <div className="mr-3">{getIcon(toast.variant)}</div>
@@ -110,12 +90,7 @@ export const ToastContainer = ({
             onClick={() => onRemove(toast.id)}
             className="ml-auto -mx-1.5 -my-1.5 rounded-lg p-1.5 inline-flex h-8 w-8 items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-600"
           >
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

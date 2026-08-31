@@ -156,7 +156,7 @@ describe('apiClient', () => {
     });
 
     it('should have correct timeout', async () => {
-      expect(apiClient.defaults.timeout).toBe(10000);
+      expect(apiClient.defaults.timeout).toBe(20000);
     });
 
     it('should have correct default headers', async () => {
